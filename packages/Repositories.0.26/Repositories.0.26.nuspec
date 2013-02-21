@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Repositories</id>
+    <version>0.26</version>
+    <title>Repositories</title>
+    <authors>Skookum</authors>
+    <owners>Skookum</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/Skookum/dotnetrepositories</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Domain Driven Design Repositories</description>
+    <summary>Domain Driven Design Repositories</summary>
+    <tags>Repository, DDD, NHibernate, Entity Framework</tags>
+    <dependencies>
+      <dependency id="FluentNHibernate" version="1.3.0.733" />
+      <dependency id="NHibernate" version="3.3.2.4000" />
+      <dependency id="Iesi.Collections" version="3.2.0.4000" />
+      <dependency id="EntityFramework" version="5.0.0" />
+    </dependencies>
+    <references>
+      <reference file="Repositories.dll" />
+    </references>
+  </metadata>
+</package>
