@@ -22,15 +22,15 @@ namespace Student.Controllers
    
 
         // GET api/values
-        public IEnumerable<string> Get()
+        public IQueryable<MainStudent> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _studentRepository.Get<MainStudent>();
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public IQueryable Get(Guid id)
         {
-            return "value";
+            return _studentRepository.Get<MainStudent>().Where(m => m.Id == id);
         }
 
         // POST api/values
