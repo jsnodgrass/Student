@@ -14,10 +14,10 @@ namespace Student.Controllers
 
         private IStudentRepository _studentRepository;
 
+
         public StudentsController(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
-            //_studentRepository = new StudentRepository(NHibernateConfigurator.BuildSessionFactory<MainStudent>());
         }
    
 

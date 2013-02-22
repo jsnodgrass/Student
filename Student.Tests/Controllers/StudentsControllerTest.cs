@@ -16,7 +16,6 @@ using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Student.Tests.Controllers
 {
-    [TestClass]
     public class StudentsControllerTest
     {
         Mock<IStudentRepository> _studentRepository;
