@@ -35,8 +35,15 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Repositories, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Repositories.0.26\lib\Repositories.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -120,8 +127,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mockers\RepositoryMocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\ValuesControllerTest.cs" />
+    <Compile Include="Controllers\StudentsControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -130,6 +138,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Student.Data\Student.Data.csproj">
+      <Project>{B112CB17-82BC-4161-AB73-ECFFBA0B8307}</Project>
+      <Name>Student.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Student.Domain\Student.Domain.csproj">
+      <Project>{AC384DAF-E222-4046-BD31-88543D709180}</Project>
+      <Name>Student.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Student\Student.csproj">
       <Project>{BEED77E0-B2BF-48F9-9C9F-85B22CB9CA2F}</Project>
       <Name>Student</Name>

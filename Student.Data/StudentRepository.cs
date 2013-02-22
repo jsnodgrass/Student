@@ -1,12 +1,17 @@
-﻿using NHibernate;
+﻿using System.Linq;
+using NHibernate;
 using Repositories;
+using Repositories.Interfaces;
 
-namespace Students.Domain
+namespace Student.Data
 {
-    public class StudentRepository : NhibernateRepository
+    public interface IStudentRepository : IRepository
     {
-        public StudentRepository(ISession session)
-            : base(session)
+    }
+
+    public class StudentRepository : NhibernateRepository, IStudentRepository
+    {
+        public StudentRepository(ISession session) : base(session)
         {
         }
     }

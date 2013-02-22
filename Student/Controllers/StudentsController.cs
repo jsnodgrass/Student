@@ -6,18 +6,18 @@ using System.Net.Http;
 using System.Web.Http;
 using Student.Data;
 using Student.Domain;
-using Students.Domain;
 
 namespace Student.Controllers
 {
     public class StudentsController : ApiController
     {
 
-        private StudentRepository _studentRepository;
+        private IStudentRepository _studentRepository;
 
-        public StudentsController()
+        public StudentsController(IStudentRepository studentRepository)
         {
-            _studentRepository = new StudentRepository(NHibernateConfigurator.BuildSessionFactory<MainStudent>());
+            _studentRepository = studentRepository;
+            //_studentRepository = new StudentRepository(NHibernateConfigurator.BuildSessionFactory<MainStudent>());
         }
    
 
