@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,7 +25,10 @@ namespace Student.Controllers
         // GET api/values
         public IQueryable<MainStudent> Get()
         {
-            return _studentRepository.Get<MainStudent>();
+            var student = _studentRepository.Get<MainStudent>();
+
+
+            return student;
         }
 
         // GET api/values/5
@@ -34,18 +38,37 @@ namespace Student.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]MainStudent newStudent)
         {
+            newStudent.Id = Guid.NewGuid();
+            _studentRepository.Create<MainStudent>(newStudent);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(Guid id, [FromBody]MainStudent student)
         {
+            MainStudent studentToEdit = null;
+            studentToEdit = _studentRepository.Get<MainStudent>().Where(m => m.Id == id).SingleOrDefault();
+
+            if (studentToEdit == null || studentToEdit.Id != id) return Request.CreateResponse(HttpStatusCode.NotFound);
+
+            studentToEdit.FirstName = student.FirstName;
+            studentToEdit.LastName = student.LastName;
+
+            _studentRepository.Update<MainStudent>(studentToEdit);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(Guid id)
         {
+            MainStudent studentToDelete = null;
+            studentToDelete = _studentRepository.Get<MainStudent>().Where(m => m.Id == id).SingleOrDefault();
+            if (studentToDelete == null) return Request.CreateResponse(HttpStatusCode.NotFound);
+
+            _studentRepository.Delete<MainStudent>(studentToDelete);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

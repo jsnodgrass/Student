@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -36,11 +37,15 @@ namespace Student
             builder.Register(x => configurator.BuildSessionFactory("DefaultConnection", typeof(StudentMap))).SingleInstance();
             builder.Register(x => x.Resolve<ISessionFactory>().OpenSession()).InstancePerApiRequest();
             builder.RegisterAssemblyTypes(typeof(IStudentRepository).Assembly).Where(type => type.Name.EndsWith("Repository")).AsImplementedInterfaces().InstancePerApiRequest();
-
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             // override default dependency resolver to use Autofac
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            json.SerializerSettings.ContractResolver = new NHibernateContractResolver();
 
             // this override is needed because WebAPI is not using DependencyResolver to build controllers 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);

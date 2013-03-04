@@ -9,6 +9,8 @@ namespace Student.Data.Mappings
         {
             Id(c => c.Id);
             Map(c => c.Name);
+
+            References(c => c.CourseStudent, "Id").ReadOnly();
         }
     }
 }

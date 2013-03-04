@@ -10,7 +10,8 @@ namespace Student.Data.Mappings
             Id(s => s.Id);
             Map(s => s.FirstName);
             Map(s => s.LastName);
-            HasMany(s => s.Courses);
+
+            HasMany(s => s.CourseStudents).KeyColumn("StudentId");
         }
     }
 }

@@ -40,15 +40,15 @@ namespace Student.Tests.Controllers
             Assert.AreEqual(2, result.Count());
             Assert.AreEqual("Jason", result.ElementAt(0).FirstName);
             Assert.AreEqual("Snodgrass", result.ElementAt(0).LastName);
-            Assert.AreEqual("History 101", result.ElementAt(0).Courses.ElementAt(0).Name);
-            Assert.AreEqual("History 102", result.ElementAt(0).Courses.ElementAt(1).Name);
-            Assert.AreEqual("History 103", result.ElementAt(0).Courses.ElementAt(2).Name);
+            Assert.AreEqual("History 101", result.ElementAt(0).CourseStudents.ElementAt(0).Name);
+            Assert.AreEqual("History 102", result.ElementAt(0).CourseStudents.ElementAt(1).Name);
+            Assert.AreEqual("History 103", result.ElementAt(0).CourseStudents.ElementAt(2).Name);
 
             Assert.AreEqual("John", result.ElementAt(1).FirstName);
             Assert.AreEqual("Snow", result.ElementAt(1).LastName);
-            Assert.AreEqual("History 101", result.ElementAt(1).Courses.ElementAt(0).Name);
-            Assert.AreEqual("History 102", result.ElementAt(1).Courses.ElementAt(1).Name);
-            Assert.AreEqual("History 103", result.ElementAt(1).Courses.ElementAt(2).Name);
+            Assert.AreEqual("History 101", result.ElementAt(1).CourseStudents.ElementAt(0).Name);
+            Assert.AreEqual("History 102", result.ElementAt(1).CourseStudents.ElementAt(1).Name);
+            Assert.AreEqual("History 103", result.ElementAt(1).CourseStudents.ElementAt(2).Name);
 
         }
 
