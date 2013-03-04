@@ -42,7 +42,7 @@ namespace Student.Controllers
         {
             newStudent.Id = Guid.NewGuid();
             _studentRepository.Create<MainStudent>(newStudent);
-            return Request.CreateResponse(HttpStatusCode.Created);
+            return Request.CreateResponse(HttpStatusCode.Created, newStudent);
         }
 
         // PUT api/values/5
@@ -57,7 +57,7 @@ namespace Student.Controllers
             studentToEdit.LastName = student.LastName;
 
             _studentRepository.Update<MainStudent>(studentToEdit);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, studentToEdit);
         }
 
         // DELETE api/values/5
