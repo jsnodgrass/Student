@@ -8,7 +8,7 @@ using Student.Domain;
 
 namespace Student.Tests.Mockers
 {
-    public static class RepositoryMocker
+    public static class StudentRepositoryMocker
     {
         public static IStudentRepository MockUpRepository()
         {
@@ -21,7 +21,16 @@ namespace Student.Tests.Mockers
 
             List<MainStudent> students = CreateStudents();
             mockStudentRepository.Setup(r => r.Get<MainStudent>()).Returns(students.AsQueryable());
+            mockStudentRepository.Setup(r => r.Delete(It.IsAny<MainStudent>())).Callback((MainStudent student) => students.Remove(student));
+            mockStudentRepository.Setup(r => r.Create(It.IsAny<MainStudent>())).Callback((MainStudent student) => students.Add(student));
+            mockStudentRepository.Setup(r => r.Update(It.IsAny<MainStudent>())).Callback((MainStudent student) =>
+            {
+                MainStudent studentToEdit = students.Single(s => s.Id == student.Id);
+                studentToEdit = student;
+            });
 
+
+            //_studentRepository.Delete<MainStudent>(studentToDelete)
             return mockStudentRepository;
         }
 

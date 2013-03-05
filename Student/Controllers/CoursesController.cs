@@ -35,7 +35,7 @@ namespace Student.Controllers
         public HttpResponseMessage Post([FromBody]Course newCourse)
         {
             _courseRepository.Create<Course>(newCourse);
-            return Request.CreateResponse(HttpStatusCode.Created);
+            return Request.CreateResponse(HttpStatusCode.Created, newCourse);
         }
 
         // PUT api/course/5
@@ -48,7 +48,7 @@ namespace Student.Controllers
 
             courseToEdit.Name = course.Name;
             _courseRepository.Create<Course>(courseToEdit);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, course);
 
         }
 

@@ -30,7 +30,7 @@ namespace Student.Tests.Controllers
             _newStudent.FirstName = "Peyton";
             _newStudent.LastName = "Manning";
 
-            _studentRepository = RepositoryMocker.GetStudentRepositoryMock();
+            _studentRepository = StudentRepositoryMocker.GetStudentRepositoryMock();
 
             _studentsController = new StudentsController(_studentRepository.Object);
             HttpConfiguration configuration = new HttpConfiguration();
@@ -89,6 +89,7 @@ namespace Student.Tests.Controllers
         {
             // Act
             HttpResponseMessage response = _studentsController.Post(_newStudent);
+            IQueryable<MainStudent> allStudents = _studentsController.Get();
 
             // Assert
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
@@ -96,10 +97,7 @@ namespace Student.Tests.Controllers
             Assert.IsNotNull(student);
             Assert.AreEqual("Peyton", student.FirstName);
             Assert.AreEqual("Manning", student.LastName);
-
-            //_studentRepository.Verify(x => x.IsStudentIdTaken("newStudentId", 1), Times.Once());
-            //_studentRepository.Verify(x => x.Add(student), Times.Once());
-
+            Assert.AreEqual(3, allStudents.Count());
         }
 
         [Test]
@@ -120,19 +118,20 @@ namespace Student.Tests.Controllers
             Assert.AreEqual("Snoddy", student.LastName);
         }
 
-        //[Test]
-        //public void Delete()
-        //{
+        [Test]
+        public void Delete()
+        {
             // Act
-            //IQueryable<MainStudent> allStudents = _studentsController.Get();
-            //var studentToDelete = allStudents.ElementAt(0);
+            IQueryable<MainStudent> allStudents = _studentsController.Get();
+            var studentToDelete = allStudents.ElementAt(0);
 
-            //HttpResponseMessage response = _studentsController.Delete(studentToDelete.Id);
+            HttpResponseMessage response = _studentsController.Delete(studentToDelete.Id);
 
-            //IQueryable<MainStudent> allStudents2 = _studentsController.Get();
+            IQueryable<MainStudent> allStudents2 = _studentsController.Get();
 
-            //// Assert
-            //Assert.AreEqual(1, allStudents2.Count());
-        //}
+            // Assert
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+            Assert.AreEqual(1, allStudents2.Count());
+        }
     }
 }
